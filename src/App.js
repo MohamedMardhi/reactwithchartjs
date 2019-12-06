@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Chart from './components/Chart';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      chartData: {}
+    }
+  }
+  componentWillMount() {
+    this.getChartData();
+  };
+
+  getChartData() {
+    // put you API call request here
+    this.setState({
+      chartData: {
+        labels: ['Jacksonville city', 'Miami city', 'St. Petersburg city', 'Hollywood city', 'Orlando city', 'Miramar city'],
+        datasets: [
+          {
+            label: 'Population',
+            data: [
+              821784,
+              399457,
+              335709,
+              244769,
+              238300,
+              224669
+            ],
+            backgroundColor: [
+              '#74b9ff', '#0984e3', '#fab1a0', '#ffeaa7', '#636e72', '#fdcb6e'
+            ]
+          }
+        ]
+      }
+    });
+  }
+  render() {
+    return (
+
+      <div className="App">
+
+        <Chart chartData={this.state.chartData} location="California" legendPosition="bottom" />
+      </div>
+    )
+  }
 }
-
 export default App;
